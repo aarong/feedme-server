@@ -1,6 +1,6 @@
 {
   "name": "feedme-server",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Feedme server library for Node.js.",
   "main": "index.js",
   "scripts": {

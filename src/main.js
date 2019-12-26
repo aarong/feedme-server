@@ -14,6 +14,7 @@ if (process.env.NODE_ENV !== "test") {
  * Outward-facing server factory function.
  */
 export default function feedmeServer(options) {
+  // Accept either a transport or a server core
   const s = server(options);
   return s;
 }

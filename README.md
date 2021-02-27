@@ -1,23 +1,24 @@
 [![Build Status](https://travis-ci.com/aarong/feedme-server.svg?branch=master)](https://travis-ci.com/aarong/feedme-server)
 [![Coverage Status](https://coveralls.io/repos/github/aarong/feedme-server/badge.svg?branch=master)](https://coveralls.io/github/aarong/feedme-server?branch=master)
 
+[Logo]
+
 # Feedme Server
 
 A Feedme server library for Node.js. Callback and promise/async friendly.
 
 Link to feedme-server-core.
 
-QUESTION -- Do I want/need some sort of await functionality on feedTermination
-and disconnect? For example, say you have a Kick action that terminates a
-client's chatroom feed When that action returns, you probably want to be assured
-that the client has actually been terminated Tricky with the three different
-usages?
+Develop business logic without respect to scaling/clustering architecture.
 
 Action revelations obtain a lock on a feed (i.e. nobody else can reveal) Then
 they update central feed data Then they publish an ActionRevelation to the
 cluster Then they unlock the feed -- Is there a guarantee that the revelation
 has been entirely disseminated before another node does one? -- What you really
-need is pubsub acknowledgements -- doesn't exist on Redis
+need is pubsub ordering -- doesn't exist on Redis. Kafka has this, but you are
+limited to low tens of thousands of topics. You could use Redis and incorporate
+your own ordering system (i.e. pass version numbers). Am I sure that you can
+scale to a huge number of pubsub subscriptions on Redis?
 
 OPTION -- any way to do this with locking? You could lock a feed while you
 terminate clients, but how would you know when the terminations have been
@@ -64,6 +65,8 @@ QUESTION
 - What if ALL messaging to a given client went through a certain topic -- order
   guaranteed
 - This might make server-core no good for this
+
+Authorizers, generators, executors
 
 ## API
 
